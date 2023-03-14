@@ -1,4 +1,5 @@
 import "./App.css";
+import("tailwindcss").Config;
 
 import React, {useState} from "react";
 import Header from "./components/Header";
