@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Thought } = require('../models');
+const { User, Post } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -12,10 +12,10 @@ const resolvers = {
     },
     posts: async (parent, { name }) => {
       const params = name ? { name } : {};
-      return Thought.find(params).sort({ createdAt: -1 });
+      return Post.find(params).sort({ createdAt: -1 });
     },
     post: async (parent, { postId }) => {
-      return Post.findOne({ _id: posttId });
+      return Post.findOne({ _id: postId });
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -41,14 +41,14 @@ const resolvers = {
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError('Incorrect email or password');
       }
 
       const token = signToken(user);
 
       return { token, user };
     },
-    addPost: async (parent, { postText }, context) => {
+    addPost: async (parent, { postText, postAuthor }, context) => {
       if (context.user) {
         const post = await Post.create({
           postText,
@@ -64,13 +64,13 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    addComment: async (parent, { postId, commentText }, context) => {
+    addComment: async (parent, { postId, commentBody }, context) => {
       if (context.user) {
         return Post.findOneAndUpdate(
           { _id: postId },
           {
             $addToSet: {
-              comments: { commentText, commentAuthor: context.user.name },
+              comments: { commentBody, commentAuthor: context.user.name },
             },
           },
           {
