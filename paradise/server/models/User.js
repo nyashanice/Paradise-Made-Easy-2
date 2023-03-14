@@ -23,8 +23,14 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
+      // validate: {
+      //   len: [8],
+      // },
       validate: {
-        len: [8],
+        validator: function (value) {
+          return value.length > 0;
+        },
+        message: "myField must have a non-empty value",
       },
     },
     //   array of _id values referencing thought model

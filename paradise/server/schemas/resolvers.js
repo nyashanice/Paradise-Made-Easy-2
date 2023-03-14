@@ -7,15 +7,15 @@ const resolvers = {
     users: async () => {
       return User.find().populate('posts');
     },
-    user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('posts');
+    user: async (parent, { name }) => {
+      return User.findOne({ name }).populate('posts');
     },
-    thoughts: async (parent, { username }) => {
-      const params = username ? { username } : {};
+    posts: async (parent, { name }) => {
+      const params = name ? { name } : {};
       return Thought.find(params).sort({ createdAt: -1 });
     },
-    thought: async (parent, { thoughtId }) => {
-      return Thought.findOne({ _id: thoughtId });
+    post: async (parent, { postId }) => {
+      return Post.findOne({ _id: posttId });
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -26,8 +26,8 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    addUser: async (parent, { name, email, password }) => {
+      const user = await User.create({ name, email, password });
       const token = signToken(user);
       return { token, user };
     },
@@ -48,11 +48,11 @@ const resolvers = {
 
       return { token, user };
     },
-    addThought: async (parent, { postText }, context) => {
+    addPost: async (parent, { postText }, context) => {
       if (context.user) {
         const post = await Post.create({
           postText,
-          postAuthor: context.user.username,
+          postAuthor: context.user.name,
         });
 
         await User.findOneAndUpdate(
@@ -70,7 +70,7 @@ const resolvers = {
           { _id: postId },
           {
             $addToSet: {
-              comments: { commentText, commentAuthor: context.user.username },
+              comments: { commentText, commentAuthor: context.user.name },
             },
           },
           {
@@ -81,11 +81,11 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    removeThought: async (parent, { postId }, context) => {
+    removePost: async (parent, { postId }, context) => {
       if (context.user) {
         const post = await Post.findOneAndDelete({
           _id: postId,
-          postAuthor: context.user.username,
+          postAuthor: context.user.name,
         });
 
         await User.findOneAndUpdate(
@@ -105,7 +105,7 @@ const resolvers = {
             $pull: {
               comments: {
                 _id: commentId,
-                commentAuthor: context.user.username,
+                commentAuthor: context.user.name,
               },
             },
           },
