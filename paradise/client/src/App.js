@@ -9,7 +9,7 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   return (
     <div>
-      <Header />
+      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Footer />
     </div>
   );
