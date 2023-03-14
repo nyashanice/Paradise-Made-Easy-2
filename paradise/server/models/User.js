@@ -1,5 +1,6 @@
-const dateFormat = require('../utils/dateFormat');
+const dateFormat = require("../utils/dateFormat");
 const { Schema, model } = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const userSchema = new Schema(
   {
@@ -14,6 +15,13 @@ const userSchema = new Schema(
         message: "Please enter a valid email address",
       },
     },
+    password: {
+      type: String,
+      required: true,
+      validate: {
+        len: [8],
+      },
+    },
     //   array of _id values referencing thought model
     posts: [
       {
@@ -22,9 +30,25 @@ const userSchema = new Schema(
       },
     ],
   },
+  {
+    hooks: {
+      beforeCreate: async (newUserData) => {
+        newUserData.password = await bcrypt.hash(newUserData.password, 8);
+        return newUserData;
+      },
+      beforeUpdate: async (updatedUserData) => {
+        if (updatedUserData.password) {
+          updatedUserData.password = await bcrypt.hash(
+            updatedUserData.password,
+            8
+          );
+        }
+        return updatedUserData;
+      },
+    },
+  }
 );
 
 const User = model("user", userSchema);
 
 module.exports = { User };
-
