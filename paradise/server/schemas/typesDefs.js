@@ -6,13 +6,13 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
-    thoughts: [Post]!
+    posts: [Post]!
   }
 
-  type Thought {
+  type Post {
     _id: ID
-    thoughtText: String
-    thoughtAuthor: String
+    postText: String
+    postAuthor: String
     createdAt: String
     comments: [Comment]!
   }

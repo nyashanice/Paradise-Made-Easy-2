@@ -28,7 +28,7 @@ export default function Header() {
   const handlePageChange = (page) => setCurrentPage(page);
 
   return (
-    <header>
+    <header class="bg-white">
       <Navigation
         currentPage={currentPage}
         handlePageChange={handlePageChange}
