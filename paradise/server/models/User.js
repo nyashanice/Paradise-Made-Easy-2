@@ -1,45 +1,30 @@
-const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
+const { Schema, model } = require("mongoose");
 
-const thoughtSchema = new Schema({
-  thoughtText: {
-    type: String,
-    required: 'You need to leave a post!',
-    minlength: 1,
-    maxlength: 280,
-    trim: true,
-  },
-  thoughtAuthor: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
-  },
-  comments: [
-    {
-      commentText: {
-        type: String,
-        required: true,
-        minlength: 1,
-        maxlength: 280,
-      },
-      commentAuthor: {
-        type: String,
-        required: true,
-      },
-      createdAt: {
-        type: Date,
-        default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
+const userSchema = new Schema(
+  {
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+      validate: {
+        validator: function (email) {
+          return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+        },
+        message: "Please enter a valid email address",
       },
     },
-  ],
-});
+    //   array of _id values referencing thought model
+    posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
+  },
+);
 
-const Thought = model('Post', postSchema);
+const User = model("user", userSchema);
 
-module.exports = Post;
+module.exports = { User };
+
