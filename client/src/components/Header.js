@@ -5,8 +5,6 @@ import Home from "./pages/Home";
 import GuestList from "./pages/GuestList";
 import Dashboard from "./pages/Dashboard";
 
-import("tailwindcss").Config;
-
 export default function Header({ loggedIn, setLoggedIn }) {
   const [currentPage, setCurrentPage] = useState("LogIn");
 
