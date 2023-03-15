@@ -10,7 +10,7 @@ export default function Header({ loggedIn, setLoggedIn }) {
 
   if (loggedIn == true) {
     return (
-      <header>
+      <header className="text-center text-5xl p-5 bg-blue-300">
         <nav>
           <div>
             <ul>
@@ -30,6 +30,11 @@ export default function Header({ loggedIn, setLoggedIn }) {
       </header>
     );
   } else {
-    return <LogIn />;
+    return (
+      <div>
+        <header className="text-center text-5xl p-5 bg-blue-300">Paradise Made Easy</header>
+        <LogIn />
+      </div>
+    );
   }
 }
