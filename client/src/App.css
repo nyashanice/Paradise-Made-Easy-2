@@ -83,3 +83,11 @@ button {
   color: white;
   text-decoration: underline;
 }
+
+.main-text {
+  font-family: 'Bebas Neue', cursive;
+}
+
+.title {
+  font-family: 'Dancing Script', cursive;
+}

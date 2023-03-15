@@ -10,7 +10,7 @@ export default function Header() {
   };
 
   return (
-    <header className="text-center text-5xl p-5 bg-blue-300">
+    <header className="title text-center text-5xl p-5 bg-blue-300">
       Paradise Made Easy
       {Auth.loggedIn() ? (
         <nav>
