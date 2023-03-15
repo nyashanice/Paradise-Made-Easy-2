@@ -1,10 +1,5 @@
 import React from "react";
-import("tailwindcss").Config;
 
 export default function Footer() {
-    return (
-        <footer>
-            
-        </footer>
-    )
+  return <footer className="text-3xl font-bold underline">Just showing</footer>;
 }

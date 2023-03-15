@@ -17,23 +17,13 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.10",
     "apollo-server-core": "^3.12.0",
     "apollo-server-express": "^3.12.0",
     "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "graphql": "^16.6.0",
     "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^3.1.2",
-<<<<<<< HEAD:paradise/package.json
-    "lightningcss": "^1.19.0",
-    "mongoose": "^7.0.1",
-    "nodemon": "^2.0.21",
-    "path": "^0.12.7",
-    "pkg": "^5.8.1",
-    "react-router-dom": "^6.9.0"
-=======
     "mongoose": "^7.0.1"
 >>>>>>> 68b71ccce569e2c543db8a5464fb52e465bce70d:package.json
   }
