@@ -38,3 +38,5 @@ class AuthService {
 }
 
 export default new AuthService();
+
+    // "tailwindcss": "^3.2.7"
