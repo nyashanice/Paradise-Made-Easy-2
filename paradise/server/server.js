@@ -5,8 +5,9 @@ const { authMiddleware } = require('./utils/auth');
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
+require('dotenv').config();
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3003;
 const app = express();
 const server = new ApolloServer({
   typeDefs,
@@ -40,4 +41,5 @@ const startApolloServer = async (typeDefs, resolvers) => {
   };
   
 // Call the async function to start the server
-  startApolloServer(typeDefs, resolvers);
+ // startApolloServer(typeDefs, resolvers);
+ app.listen(PORT, ()=> console.log(`server started at localhost:${PORT}`))
