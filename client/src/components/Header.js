@@ -1,35 +1,32 @@
 import React, { useState } from "react";
-import Navigation from "./Navigation";
+import { Link } from "react-router-dom";
 import LogIn from "./pages/LogIn";
-import Home from "./pages/Home";
-import GuestList from "./pages/GuestList";
-import Dashboard from "./pages/Dashboard";
 
 export default function Header({ loggedIn, setLoggedIn }) {
-  const [currentPage, setCurrentPage] = useState("LogIn");
-
-  const setPage = () => {
-    if (currentPage === "Home") {
-      return <Home />;
-    }
-    if (currentPage === "GuestList") {
-      return <GuestList />;
-    }
-    if (currentPage === "Dashboard") {
-      return <Dashboard />;
-    }
+  const logout = (event) => {
+    event.preventDefault();
+    return <LogIn />;
   };
-
-  const handlePageChange = (page) => setCurrentPage(page);
 
   if (loggedIn == true) {
     return (
       <header>
-        <Navigation
-          currentPage={currentPage}
-          handlePageChange={handlePageChange}
-        />
-        {setPage()}
+        <nav>
+          <div>
+            <ul>
+              <Link to="/home">
+                <li>Home</li>
+              </Link>
+              <Link to="/guests">
+                <li>Guest List</li>
+              </Link>
+              <Link to="/dashboard">
+                <li>Dashboard</li>
+              </Link>
+              <button onClick={logout}>Logout</button>
+            </ul>
+          </div>
+        </nav>
       </header>
     );
   } else {
