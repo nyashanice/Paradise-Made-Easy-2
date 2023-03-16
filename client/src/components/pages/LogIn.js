@@ -34,7 +34,7 @@ const Login = (props) => {
   function LoginPage() {
     const [authenticated, setAuthenticated] = useState(false);
     if (authenticated) {
-      return <Redirect to="/Home.js" />
+      return <Redirect to="/home" />
     }
   
     return (
@@ -131,7 +131,7 @@ export const Login = (props) => {
 
   return (
     <div>
-      {isLoggedIn ? <Redirect to="/Home.js" /> : <LoginPage />}
+      {isLoggedIn ? <Redirect to="/home" /> : <LoginPage />}
     </div>
   );
 

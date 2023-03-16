@@ -1,30 +1,44 @@
-import React, { useState } from "react";
-import { Link } from 'react-router-dom';
 import { useMutation } from "@apollo/client";
-
-import { ADD_COMMENT } from "../../utils/mutations";
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { ADD_POST } from "../../utils/mutations";
+import { QUERY_POSTS, QUERY_ME } from "../../utils/queries";
 import Auth from "../../utils/auth";
 
-const CommentForm = ({ postId }) => {
-  const [commentBody, setCommentBody] = useState("");
+const PostForm = () => {
+  const [postText, setPostText] = useState(" ");
+
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addComment, { error }] = useMutation(ADD_COMMENT);
-
+  const [addPost, { error }] = useMutation(ADD_POST, {
+    update(cache, { data: { addPost } }) {
+      try {
+        const { posts } = cache.readQuery({ query: QUERY_POSTS });
+        cache.writeQuery({
+          query: QUERY_POSTS,
+          data: { posts: [addPost, ...posts] },
+        });
+      } catch (e) {
+        console.error(e);
+      }
+      const { me } = cache.readQuery({ query: QUERY_ME });
+      cache.writeQuery({
+        query: QUERY_ME,
+        data: { me: { ...me, posts: [...me.posts, addPost] } },
+      });
+    },
+  });
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const { data } = await addComment({
+      const { data } = await addPost({
         variables: {
-          thoughtId,
-          commentBody,
-          commentAuthor: Auth.getUser().data.name,
+          postText,
+          postAuthor: Auth.getUser().data.name,
         },
       });
-
-      setCommentText("");
+      setPostText("");
     } catch (err) {
       console.error(err);
     }
@@ -33,15 +47,15 @@ const CommentForm = ({ postId }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === "commentBody" && value.length <= 300) {
-      setCommentText(value);
+    if (name === "postText" && value.length <= 300) {
+      setPostText(value);
       setCharacterCount(value.length);
     }
   };
 
   return (
     <div>
-      <h4>What's on your mind?</h4>
+      <h4>Leave a post about your trip!</h4>
 
       {Auth.loggedIn() ? (
         <>
@@ -60,8 +74,8 @@ const CommentForm = ({ postId }) => {
             <div className="col-12 col-lg-9">
               <textarea
                 name="commentBody"
-                placeholder="Add your comment..."
-                value={commentBody}
+                placeholder="Leave a post here"
+                value={postText}
                 className="form-input w-100"
                 style={{ lineHeight: "1.5", resize: "vertical" }}
                 onChange={handleChange}
@@ -70,14 +84,14 @@ const CommentForm = ({ postId }) => {
 
             <div className="col-12 col-lg-3">
               <button className="btn btn-primary btn-block py-3" type="submit">
-                Add Comment
+                Create Post
               </button>
             </div>
           </form>
         </>
       ) : (
         <p>
-          You need to be logged in to comment. Please{" "}
+          You need to be logged in to post. Please{" "}
           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
         </p>
       )}
@@ -85,4 +99,4 @@ const CommentForm = ({ postId }) => {
   );
 };
 
-export default CommentForm;
+export default PostForm;
