@@ -155,15 +155,33 @@
 
 // export default GuestList;
 
-// import {useState, useEffect} from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 // import Guests from './cards/Guests';
 
-// const getUsers = ({
-//     name,
-//     email
-// }) => {
-//     if (!user.length) {
-//         return <h3>This event has no guests.</h3>
-//     }
-//     return (<p>hi</p>)
-// }
+const GuestList = ({ users }) => {
+  if (!users.length) {
+    return <h2>No guests for this trip</h2>;
+  }
+  return (
+    <div>
+      <h3 className="text-center main-text text-3xl">Guests</h3>
+      <div className="grid grid-cols-2">
+        {users &&
+          users.map((user) => (
+            <div
+              key={user._id}
+              className="max-w-sm rounded overflow-hidden shadow-lg p-4"
+            >
+              <div>
+                <h4 className="font-bold text-xl mb-2">{user.name}</h4>
+                <p>Email: {user.email}</p>
+              </div>
+            </div>
+          ))}
+      </div>
+    </div>
+  );
+};
+
+export default GuestList;
