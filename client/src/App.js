@@ -36,29 +36,29 @@ const client = new ApolloClient({
   link: authorize.concat(httpLink),
 });
 
-const state = {
-  name: "",
-  email: "",
-  posts: [],
-};
+// const state = {
+//   name: "",
+//   email: "",
+//   posts: [],
+// };
 
-const receivedUsers = () => {
-  this.getUserData;
-};
+// const receivedUsers = () => {
+//   this.getUserData;
+// };
 
-const getUserData = () => {
-  axios
-    .get("/api")
-    .then((response) => {
-      const data = response.data;
-      this.setState;
-      ({ users: data });
-      console.log("done!");
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-};
+// const getUserData = () => {
+//   axios
+//     .get("/api")
+//     .then((response) => {
+//       const data = response.data;
+//       this.setState;
+//       ({ users: data });
+//       console.log("done!");
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//     });
+// };
 
 function App() {
   // const [loggedIn, setLoggedIn] = useState(false);
