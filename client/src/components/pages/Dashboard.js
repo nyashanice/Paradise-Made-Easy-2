@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useParams, Link } from "react-router-dom";
 import PostForm from "../postForm";
 import PostList from "../postList";
 import { QUERY_USER, QUERY_ME } from "../../utils/queries";
@@ -9,7 +9,7 @@ import Auth from "../../utils/auth";
 export default function Dashboard() {
   const { name: userParam } = useParams();
 
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+  const { data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { name: userParam },
   });
 
@@ -20,7 +20,16 @@ export default function Dashboard() {
   }
 
   if (!user?.name) {
-    return <p>Please login to see this content.</p>;
+    return (
+      <p>
+        Please
+        <Link className="text-blue-700" to="/login">
+          {" "}
+          login{" "}
+        </Link>
+        to see this content.
+      </p>
+    );
   }
 
   return (
