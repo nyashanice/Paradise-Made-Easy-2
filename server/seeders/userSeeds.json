@@ -3,5 +3,55 @@
     "name": "Nya Tyus",
     "email": "nya@email.com",
     "password": "password"
+  },
+  {
+    "name": "Robyn Fenty",
+    "email": "rihanna@email.com",
+    "password": "hostess01"
+  },
+  {
+    "name": "Jonathan Dawkins",
+    "email": "jonathan@email.com",
+    "password": "password01"
+  },
+  {
+    "name": "Rodney Major",
+    "email": "rodney@email.com",
+    "password": "password02"
+  },
+  {
+    "name": "Bertin",
+    "email": "bertin@email.com",
+    "password": "password03"
+  },
+  {
+    "name": "Halle Bailey",
+    "email": "halle@email.com",
+    "password": "littlemermaid"
+  },
+  {
+    "name": "Peter Parker",
+    "email": "petera@email.com",
+    "password": "spiderman"
+  },
+  {
+    "name": "Taraji Henson",
+    "email": "taraji@email.com",
+    "password": "hiddenfigures"
+  },
+  {
+    "name": "Beyonce Knowles",
+    "email": "beyonce@email.com",
+    "password": "queenbey"
+  },
+  {
+    "name": "Onika Maraj",
+    "email": "nicki@email.com",
+    "password": "superbass"
+  },
+  {
+    "name": "John Legend",
+    "email": "john@email.com",
+    "password": "allofme"
   }
 ]
