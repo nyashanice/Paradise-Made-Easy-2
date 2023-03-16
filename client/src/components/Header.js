@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import LogIn from "./pages/Login";
+import Auth from "../utils/auth";
 
-export default function Header({ loggedIn, setLoggedIn }) {
+export default function Header() {
   const logout = (event) => {
     event.preventDefault();
     return <LogIn />;
   };
 
-  if (loggedIn == true) {
-    return (
-      <header className="text-center text-5xl p-5 bg-blue-300">
+  return (
+    <header className="title text-center text-5xl p-5 bg-blue-300">
+      Paradise Made Easy
+      {Auth.loggedIn() ? (
         <nav>
           <div>
             <ul>
@@ -27,14 +29,9 @@ export default function Header({ loggedIn, setLoggedIn }) {
             </ul>
           </div>
         </nav>
-      </header>
-    );
-  } else {
-    return (
-      <div>
-        <header className="text-center text-5xl p-5 bg-blue-300">Paradise Made Easy</header>
-        <LogIn />
-      </div>
-    );
-  }
+      ) : (
+        <Link to="/login"></Link>
+      )}
+    </header>
+  );
 }
