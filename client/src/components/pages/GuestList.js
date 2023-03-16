@@ -156,6 +156,7 @@
 // export default GuestList;
 
 import React from "react";
+import { Link } from "react-router-dom";
 // import Guests from './cards/Guests';
 
 const GuestList = ({ users }) => {
@@ -164,13 +165,17 @@ const GuestList = ({ users }) => {
   }
   return (
     <div>
-      <h3>Guests</h3>
-      <div className="flex-row justify-space-between my-4">
+      <h3 className="text-center main-text text-3xl">Guests</h3>
+      <div className="grid grid-cols-2">
         {users &&
           users.map((user) => (
-            <div key={user._id}>
+            <div
+              key={user._id}
+              className="max-w-sm rounded overflow-hidden shadow-lg p-4"
+            >
               <div>
-                <h4>{user.name}</h4>
+                <h4 className="font-bold text-xl mb-2">{user.name}</h4>
+                <p>Email: {user.email}</p>
               </div>
             </div>
           ))}
