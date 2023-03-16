@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import LogIn from "./pages/Login";
+import LogIn from "./pages/LogIn";
 import Auth from "../utils/auth";
 
 export default function Header() {

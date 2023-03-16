@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React, { useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Login from "./components/pages/Login";
+import Login from "./components/pages/LogIn";
 import Signup from "./components/pages/Signup";
 import Home from "./components/pages/Home";
 import GuestList from "./components/pages/GuestList";
