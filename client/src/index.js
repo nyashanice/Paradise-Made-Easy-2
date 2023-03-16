@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./Login";
-import Home from "./Home";
+// import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import Login from "./Login";
+// import Home from "./Home";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,18 +14,18 @@ root.render(
   </React.StrictMode>
 );
 
-ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/Home" element={<Home />} />
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <BrowserRouter>
+//       <Routes>
+//         <Route path="/" element={<App />} />
+//         <Route path="/login" element={<Login />} />
+//         <Route path="/Home" element={<Home />} />
+//       </Routes>
+//     </BrowserRouter>
+//   </React.StrictMode>,
+//   document.getElementById("root")
+// );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
