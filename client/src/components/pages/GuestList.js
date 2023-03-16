@@ -155,15 +155,28 @@
 
 // export default GuestList;
 
-// import {useState, useEffect} from 'react';
+import React from "react";
 // import Guests from './cards/Guests';
 
-// const getUsers = ({
-//     name,
-//     email
-// }) => {
-//     if (!user.length) {
-//         return <h3>This event has no guests.</h3>
-//     }
-//     return (<p>hi</p>)
-// }
+const GuestList = ({ users }) => {
+  if (!users.length) {
+    return <h2>No guests for this trip</h2>;
+  }
+  return (
+    <div>
+      <h3>Guests</h3>
+      <div className="flex-row justify-space-between my-4">
+        {users &&
+          users.map((user) => (
+            <div key={user._id}>
+              <div>
+                <h4>{user.name}</h4>
+              </div>
+            </div>
+          ))}
+      </div>
+    </div>
+  );
+};
+
+export default GuestList;
