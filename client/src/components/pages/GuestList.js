@@ -154,3 +154,16 @@
 // }
 
 // export default GuestList;
+
+// import {useState, useEffect} from 'react';
+// import Guests from './cards/Guests';
+
+// const getUsers = ({
+//     name,
+//     email
+// }) => {
+//     if (!user.length) {
+//         return <h3>This event has no guests.</h3>
+//     }
+//     return (<p>hi</p>)
+// }

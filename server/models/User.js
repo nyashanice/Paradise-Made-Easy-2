@@ -33,7 +33,6 @@ const userSchema = new Schema(
         message: "myField must have a non-empty value",
       },
     },
-    //   array of _id values referencing thought model
     posts: [
       {
         type: Schema.Types.ObjectId,

@@ -28,7 +28,7 @@ class AuthService {
 
   login(idToken) {
     localStorage.setItem("id_token", idToken);
-    window.location.assign("/");
+    window.location.assign("/login");
   }
 
   logout() {
@@ -37,4 +37,5 @@ class AuthService {
   }
 }
 
+// eslint-disable-next-line
 export default new AuthService();

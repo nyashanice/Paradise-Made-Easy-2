@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-gradient-to-b from-slate-500 to-slate-300">
       <div className="grid grid-cols-2 gap-4 place-items-center">
         <div className="col-1">
           <h1 className="main-text font-bold text-6xl p-4">Invite Only</h1>
@@ -28,44 +28,44 @@ export default function Home() {
           </ul>
         </div>
       </div>
-      <div>
+      <div className="text-center p-4">
         <div>
           <h1 className="main-text text-5xl text-center">Itinerary</h1>
         </div>
         <div className="grid grid-flow-row auto-rows-3">
-          <div>
+          <div className="p-4">
             <h6 className="main-text text-2xl">Thursday: June 15</h6>
             <ul>
               <li>11AM: ARRIVE IN BARBADOS</li>
-              <li></li>
-              <li></li>
+              <li>6PM: DINNER</li>
             </ul>
           </div>
-          <div>
+          <div className="p-4">
             <h6 className="main-text text-2xl">Friday: June 16</h6>
             <ul>
-              <li>Time: activity</li>
-              <li></li>
-              <li></li>
+              <li>8AM: BREAKFAST</li>
+              <li>11AM: SNORKELING WITH TURTLES</li>
+              <li>6PM: ALL WHITE DINNER</li>
             </ul>
           </div>
-          <div>
+          <div className="p-4">
             <h6 className="main-text text-2xl">Saturday: June 17</h6>
             <ul>
-              <li>Time: activity</li>
-              <li></li>
-              <li></li>
+              <li>11AM: BRUNCH</li>
+              <li>2PM: CAVE TOUR</li>
+              <li>7PM: BEACH SHOW AND DINNER</li>
             </ul>
           </div>
-          <div>
+          <div className="p-4">
             <h6 className="main-text text-2xl">Sunday: June 18</h6>
             <ul>
-              <li>Time: activity</li>
-              <li></li>
-              <li></li>
+              <li>10AM: BREAKFAST</li>
+              <li>12PM: ISLAND TOUR</li>
+              <li>3PM: FOOD TOUR</li>
+              <li>7PM: DINNER</li>
             </ul>
           </div>
-          <div>
+          <div className="p-4">
             <h6 className="main-text text-2xl">Monday: June 19</h6>
             <ul>
               <li>11AM: UNTIL NEXT TIME</li>

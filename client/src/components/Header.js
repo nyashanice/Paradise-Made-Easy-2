@@ -23,7 +23,7 @@ export default function Header() {
             <Link to="/guests">
               <li>Guest List</li>
             </Link>
-            <Link to="/dashboard">
+            <Link to="/mydashboard">
               <li>Dashboard</li>
             </Link>
             <button className="bg-transparent" onClick={logout}>Logout</button>
