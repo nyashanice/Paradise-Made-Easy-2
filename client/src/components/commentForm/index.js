@@ -18,13 +18,13 @@ const CommentForm = ({ postId }) => {
     try {
       const { data } = await addComment({
         variables: {
-          thoughtId,
+          postId,
           commentBody,
           commentAuthor: Auth.getUser().data.name,
         },
       });
 
-      setCommentText("");
+      setCommentBody("");
     } catch (err) {
       console.error(err);
     }

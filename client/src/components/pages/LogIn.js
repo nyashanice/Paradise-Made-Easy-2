@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../utils/mutations";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Auth from "../../utils/auth";
-import Home from "../pages/Home";
 
 const Login = (props) => {
   const [user, setUser] = useState({ email: "", password: "" });
-  // const [pass, setPass] = useState("");
   const [login, { error, data }] = useMutation(LOGIN);
 
   const handleChange = (event) => {
@@ -18,22 +16,6 @@ const Login = (props) => {
       [name]: value,
     });
   };
-  // useMutation(LOGIN, {
-  //   variables: {
-  //     email: email,
-  //     password: pass,
-  //   },
-  //   onCompleted: (data) => {
-  //     // Check if the login is successful
-  //     if (data && data.login && data.login.token) {
-  //       Auth.login(data.login.token);
-  //       setAuthenticated(true);
-  //     }
-  //   },
-  //   onError: (error) => {
-  //     console.error(error);
-  //   },
-  // });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -52,11 +34,6 @@ const Login = (props) => {
       password: "",
     });
   };
-
-  // function LoginPage() {
-  //   if (authenticated) {
-  //     return <Redirect to="/home" />;
-  //   }
 
   return (
     <div className="auth-form-container bg-gray-100 h-screen flex items-center justify-center">
@@ -107,7 +84,7 @@ const Login = (props) => {
                   />
                 </div>
               </fieldset>
-              <Link to="/home">
+              <Link to="/mydashboard">
                 <button
                   type="submit"
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

@@ -6,52 +6,58 @@ import PostList from "../postList";
 import { QUERY_USER, QUERY_ME } from "../../utils/queries";
 import Auth from "../../utils/auth";
 
-export default function Dashboard() {
-  const { name: userParam } = useParams();
+const Dashboard = () => {
+  //   const { name: userParam } = useParams();
 
-  const { data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-    variables: { name: userParam },
-  });
+  //   const { data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+  //     variables: { name: userParam },
+  //   });
 
-  const user = data?.me || data?.user || {};
+  //   const user = data?.me || data?.user || {};
 
-  if (Auth.loggedIn() && Auth.getUser().data.name === userParam) {
-    return <Navigate to="dashboard" />;
-  }
+  //     if (Auth.loggedIn() && Auth.getUser().data.name === userParam) {
+  //       console.log(user);
+  //       return <Navigate to="/mydashboard" />;
+  //     }
 
-  if (!user?.name) {
-    return (
-      <p>
-        Please
-        <Link className="text-blue-700" to="/login">
-          {" "}
-          login{" "}
-        </Link>
-        to see this content.
-      </p>
-    );
-  }
+  //   if (!user?.name) {
+  //     return (
+  //       <p>
+  //         Please
+  //         <Link className="text-blue-700" to="/login">
+  //           {" "}
+  //           login{" "}
+  //         </Link>
+  //         to see this content.
+  //       </p>
+  //     );
+  //   }
 
   return (
     <div>
       <div className="flex-row justify-center mb-3">
-        <h2>Welcome {userParam ? `${user.name}!` : "to your dashboard!"}</h2>
+        <h2 className="text-center main-text text-3xl p-4">
+          Welcome to your dashboard!
+        </h2>
         <div>
           <PostList
-            posts={user.posts}
-            title={`${user.name}'s posts`}
-            showTitle={false}
-            showName={false}
+          // posts={posts}
+          // title={`${user.name}'s posts`}
+          // showTitle={false}
+          // showName={false}
           />
         </div>
         <div>
-          {!userParam && (
+          {/* {!userParam && (
             <div>
               <PostForm />
             </div>
-          )}
+          )} */}
+          <PostForm />
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Dashboard;

@@ -1,12 +1,13 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { ADD_POST } from "../../utils/mutations";
 import { QUERY_POSTS, QUERY_ME } from "../../utils/queries";
-import Auth from "../../utils/auth";
 
 const PostForm = () => {
-  const [postText, setPostText] = useState(" ");
+  const [newPost, setNewPost] = useState({
+    postText: "",
+    postAuthor: "",
+  });
 
   const [characterCount, setCharacterCount] = useState(0);
 
@@ -33,12 +34,12 @@ const PostForm = () => {
 
     try {
       const { data } = await addPost({
-        variables: {
-          postText,
-          postAuthor: Auth.getUser().data.name,
-        },
+        variables: { ...newPost },
       });
-      setPostText("");
+      setNewPost({
+        postText: "",
+        postAuthor: "",
+      });
     } catch (err) {
       console.error(err);
     }
@@ -48,53 +49,55 @@ const PostForm = () => {
     const { name, value } = event.target;
 
     if (name === "postText" && value.length <= 300) {
-      setPostText(value);
+      setNewPost(value);
       setCharacterCount(value.length);
     }
   };
 
   return (
-    <div>
-      <h4>Leave a post about your trip!</h4>
+    <div className="text-center">
+      <h4 className="p-2">↓ Leave a post about your trip! ↓</h4>
 
-      {Auth.loggedIn() ? (
-        <>
-          <p
-            className={`m-0 ${
-              characterCount === 300 || error ? "text-danger" : ""
-            }`}
+      <p
+        className={`m-0 ${
+          characterCount === 300 || error ? "text-danger" : ""
+        }`}
+      >
+        Character Count: {characterCount}/300
+        {error && <span className="ml-2">{error.message}</span>}
+      </p>
+      <form
+        className="flex-row justify-center justify-space-between-md align-center"
+        onSubmit={handleFormSubmit}
+      >
+        <div className="col-12 col-lg-9">
+          <textarea
+            name="postText"
+            placeholder="Leave a post here"
+            value={newPost.postText}
+            className="w-96 h-96 px-0 text-sm text-gray-900 bg-blue-300 border-2 border-black "
+            // style={{ lineHeight: "1.5", resize: "vertical" }}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <div className="col-12 col-lg-9">
+          <input
+            name="postAuthor"
+            placeholder="What's your name?"
+            value={newPost.postAuthor}
+            className="form-input w-96 border-4 border-black"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="col-12 col-lg-3">
+          <button
+            className="btn btn-primary btn-block py-3 bg-black w-96 text-white hover:text-gray-500"
+            type="submit"
           >
-            Character Count: {characterCount}/300
-            {error && <span className="ml-2">{error.message}</span>}
-          </p>
-          <form
-            className="flex-row justify-center justify-space-between-md align-center"
-            onSubmit={handleFormSubmit}
-          >
-            <div className="col-12 col-lg-9">
-              <textarea
-                name="commentBody"
-                placeholder="Leave a post here"
-                value={postText}
-                className="form-input w-100"
-                style={{ lineHeight: "1.5", resize: "vertical" }}
-                onChange={handleChange}
-              ></textarea>
-            </div>
-
-            <div className="col-12 col-lg-3">
-              <button className="btn btn-primary btn-block py-3" type="submit">
-                Create Post
-              </button>
-            </div>
-          </form>
-        </>
-      ) : (
-        <p>
-          You need to be logged in to post. Please{" "}
-          <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
-        </p>
-      )}
+            Create Post
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
