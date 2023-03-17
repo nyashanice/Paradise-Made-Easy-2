@@ -3,57 +3,23 @@ import { useQuery } from "@apollo/client";
 import { Navigate, useParams, Link } from "react-router-dom";
 import PostForm from "../postForm";
 import PostList from "../postList";
-import { QUERY_USER, QUERY_ME } from "../../utils/queries";
-import Auth from "../../utils/auth";
+import { QUERY_POSTS, QUERY_USER } from "../../utils/queries";
 
 const Dashboard = () => {
-  //   const { name: userParam } = useParams();
-
-  //   const { data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-  //     variables: { name: userParam },
-  //   });
-
-  //   const user = data?.me || data?.user || {};
-
-  //     if (Auth.loggedIn() && Auth.getUser().data.name === userParam) {
-  //       console.log(user);
-  //       return <Navigate to="/mydashboard" />;
-  //     }
-
-  //   if (!user?.name) {
-  //     return (
-  //       <p>
-  //         Please
-  //         <Link className="text-blue-700" to="/login">
-  //           {" "}
-  //           login{" "}
-  //         </Link>
-  //         to see this content.
-  //       </p>
-  //     );
-  //   }
+  const { loading, data } = useQuery(QUERY_POSTS);
+  const posts = data?.posts || [];
 
   return (
     <div>
       <div className="flex-row justify-center mb-3">
         <h2 className="text-center main-text text-3xl p-4">
-          Welcome to your dashboard!
+          Welcome to the dashboard!
         </h2>
         <div>
-          <PostList
-          // posts={posts}
-          // title={`${user.name}'s posts`}
-          // showTitle={false}
-          // showName={false}
-          />
+          <PostForm />
         </div>
         <div>
-          {/* {!userParam && (
-            <div>
-              <PostForm />
-            </div>
-          )} */}
-          <PostForm />
+          <PostList posts={posts} title="Guest posts" />
         </div>
       </div>
     </div>

@@ -3,42 +3,21 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  createHttpLink,
 } from "@apollo/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import React, { useState } from "react";
-import { setContext } from "@apollo/client/link/context";
+import React from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup";
 import Home from "./components/pages/Home";
-import GuestList from "./components/pages/GuestList";
 import Guests from "./components/pages/cards/Guests";
 import Dashboard from "./components/pages/Dashboard";
-import axios from "axios";
 
-const authorize = setContext((_, { headers }) => {
-  const token = localStorage.getItem("id_token");
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : "",
-    },
-  };
-});
-
-// const httpLink = createHttpLink({
-//   uri: "/graphql",
-// });
-
-// const client = new ApolloClient({
-//   cache: new InMemoryCache(),
-//   link: authorize.concat(httpLink),
-// });
 
 const client = new ApolloClient({
   uri: "http://localhost:3001/graphql",
+  // uri: "/graphql",
   cache: new InMemoryCache(),
 });
 

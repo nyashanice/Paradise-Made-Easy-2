@@ -22,19 +22,4 @@ const Guests = () => {
   );
 };
 
-// function Guests(props) {
-//   return (
-//     <ul className="list-group">
-//       {props.users.map((user) => (
-//         <li className="list-group-item" key={result.id}>
-//           <card>
-//             <h3>Name={user.name}</h3>
-//             <p>Email={user.email}</p>
-//           </card>
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// }
-
 export default Guests;

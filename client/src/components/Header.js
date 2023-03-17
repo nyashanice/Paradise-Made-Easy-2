@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import LogIn from "./pages/Login";
-import Auth from "../utils/auth";
+// import Auth from "../utils/auth";
 
 export default function Header() {
   const logout = (event) => {
     event.preventDefault();
-    Auth.logout();
+    // Auth.logout();
     return <LogIn />;
   };
 

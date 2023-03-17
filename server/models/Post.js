@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 const commentSchema = require("./Comment");
-// const dateFormat = require('../utils/dateFormat');
 
 const postSchema = new Schema({
   postText: {
@@ -17,8 +16,7 @@ const postSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now,
-    // get: (timestamp) => dateFormat(timestamp),
+    default: new Date(Date.now()).toString,
   },
   comments: [commentSchema],
 });

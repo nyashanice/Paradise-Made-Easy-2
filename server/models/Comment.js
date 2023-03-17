@@ -10,7 +10,7 @@ const commentSchema = new mongoose.Schema(
 
     commentAuthor: { type: String, required: true },
 
-    createdAt: { type: Date, default: Date.now },
+    createdAt: { type: Date, default: new Date(Date.now()).toString },
   },
   {
     toJSON: {
@@ -18,13 +18,5 @@ const commentSchema = new mongoose.Schema(
     },
   }
 );
-
-// reformats time
-// function reformat(createdAt) {
-//   const hours = createdAt.getUTCHours();
-//   const minutes = createdAt.getUTCMinutes();
-//   const time = hours + ":" + minutes;
-//   return time;
-// }
 
 module.exports = commentSchema;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
-import Auth from "../../utils/auth";
+// import Auth from "../../utils/auth";
 
 export const Signup = (props) => {
   const [email, setEmail] = useState("");
