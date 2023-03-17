@@ -1,45 +1,27 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { ADD_POST } from "../../utils/mutations";
-import { QUERY_POSTS, QUERY_ME } from "../../utils/queries";
 
 const PostForm = () => {
-  const [newPost, setNewPost] = useState({
+  const [createPost, setCreatePost] = useState({
     postText: "",
     postAuthor: "",
   });
 
   const [characterCount, setCharacterCount] = useState(0);
 
-  const [addPost, { error }] = useMutation(ADD_POST, {
-    update(cache, { data: { addPost } }) {
-      try {
-        const { posts } = cache.readQuery({ query: QUERY_POSTS });
-        cache.writeQuery({
-          query: QUERY_POSTS,
-          data: { posts: [addPost, ...posts] },
-        });
-      } catch (e) {
-        console.error(e);
-      }
-      const { me } = cache.readQuery({ query: QUERY_ME });
-      cache.writeQuery({
-        query: QUERY_ME,
-        data: { me: { ...me, posts: [...me.posts, addPost] } },
-      });
-    },
-  });
+  const [addPost, { error }] = useMutation(ADD_POST);
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
       const { data } = await addPost({
-        variables: { ...newPost },
+        variables: {
+          ...createPost,
+        },
       });
-      setNewPost({
-        postText: "",
-        postAuthor: "",
-      });
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
@@ -49,8 +31,10 @@ const PostForm = () => {
     const { name, value } = event.target;
 
     if (name === "postText" && value.length <= 300) {
-      setNewPost(value);
+      setCreatePost({ ...createPost, [name]: value });
       setCharacterCount(value.length);
+    } else if (name !== "postText") {
+      setCreatePost({ ...createPost, [name]: value });
     }
   };
 
@@ -60,21 +44,18 @@ const PostForm = () => {
 
       <p
         className={`m-0 ${
-          characterCount === 300 || error ? "text-danger" : ""
+          characterCount === 300 || error ? "text-red-500" : ""
         }`}
       >
         Character Count: {characterCount}/300
         {error && <span className="ml-2">{error.message}</span>}
       </p>
-      <form
-        className="flex-row justify-center justify-space-between-md align-center"
-        onSubmit={handleFormSubmit}
-      >
+      <form onSubmit={handleFormSubmit}>
         <div className="col-12 col-lg-9">
           <textarea
             name="postText"
             placeholder="Leave a post here"
-            value={newPost.postText}
+            value={createPost.postText}
             className="w-96 h-96 px-0 text-sm text-gray-900 bg-blue-300 border-2 border-black "
             // style={{ lineHeight: "1.5", resize: "vertical" }}
             onChange={handleChange}
@@ -84,7 +65,7 @@ const PostForm = () => {
           <input
             name="postAuthor"
             placeholder="What's your name?"
-            value={newPost.postAuthor}
+            value={createPost.postAuthor}
             className="form-input w-96 border-4 border-black"
             onChange={handleChange}
           />

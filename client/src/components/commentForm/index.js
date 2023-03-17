@@ -4,7 +4,7 @@ import { useMutation } from "@apollo/client";
 
 import { ADD_COMMENT } from "../../utils/mutations";
 
-import Auth from "../../utils/auth";
+// import Auth from "../../utils/auth";
 
 const CommentForm = ({ postId }) => {
   const [commentBody, setCommentBody] = useState("");
@@ -20,7 +20,7 @@ const CommentForm = ({ postId }) => {
         variables: {
           postId,
           commentBody,
-          commentAuthor: Auth.getUser().data.name,
+          // commentAuthor: Auth.getUser().data.name,
         },
       });
 
@@ -42,9 +42,6 @@ const CommentForm = ({ postId }) => {
   return (
     <div>
       <h4>What's on your mind?</h4>
-
-      {Auth.loggedIn() ? (
-        <>
           <p
             className={`m-0 ${
               characterCount === 300 || error ? "text-danger" : ""
@@ -74,13 +71,6 @@ const CommentForm = ({ postId }) => {
               </button>
             </div>
           </form>
-        </>
-      ) : (
-        <p>
-          You need to be logged in to comment. Please{" "}
-          <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
-        </p>
-      )}
     </div>
   );
 };

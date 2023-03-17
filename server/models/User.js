@@ -30,7 +30,7 @@ const userSchema = new Schema(
         validator: function (value) {
           return value.length > 0;
         },
-        message: "myField must have a non-empty value",
+        message: "Password must have a non-empty value",
       },
     },
     posts: [
