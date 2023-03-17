@@ -1,19 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import LogIn from "./pages/Login";
-// import Auth from "../utils/auth";
+import Login from "./pages/Login";
 
 export default function Header() {
   const logout = (event) => {
     event.preventDefault();
-    // Auth.logout();
-    return <LogIn />;
+    return <Login />;
   };
 
   return (
     <header className="text-center p-5 bg-blue-300">
       <div className="title text-5xl"> Paradise Made Easy</div>
-      {/* {Auth.loggedIn() ? ( */}
       <nav>
         <div>
           <ul className="grid grid-cols-4 place-items-center">
@@ -26,15 +23,14 @@ export default function Header() {
             <Link to="/mydashboard">
               <li>Dashboard</li>
             </Link>
-            <button className="bg-transparent" onClick={logout}>Logout</button>
+            <Link to='/login'>
+              <button className="bg-transparent" onClick={logout}>
+                Logout
+              </button>
+            </Link>
           </ul>
         </div>
       </nav>
-      {/* ) : (
-        <div>
-          <Link to="/login">Login</Link>
-        </div>
-      )} */}
     </header>
   );
 }

@@ -1,9 +1,8 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { Navigate, useParams, Link } from "react-router-dom";
 import PostForm from "../postForm";
 import PostList from "../postList";
-import { QUERY_POSTS, QUERY_USER } from "../../utils/queries";
+import { QUERY_POSTS } from "../../utils/queries";
 
 const Dashboard = () => {
   const { loading, data } = useQuery(QUERY_POSTS);
@@ -19,7 +18,11 @@ const Dashboard = () => {
           <PostForm />
         </div>
         <div>
-          <PostList posts={posts} title="Guest posts" />
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <PostList posts={posts} title="Guest posts" />
+          )}
         </div>
       </div>
     </div>

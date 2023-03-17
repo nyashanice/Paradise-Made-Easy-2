@@ -51,17 +51,16 @@ const PostForm = () => {
         {error && <span className="ml-2">{error.message}</span>}
       </p>
       <form onSubmit={handleFormSubmit}>
-        <div className="col-12 col-lg-9">
+        <div>
           <textarea
             name="postText"
             placeholder="Leave a post here"
             value={createPost.postText}
             className="w-96 h-96 px-0 text-sm text-gray-900 bg-blue-300 border-2 border-black "
-            // style={{ lineHeight: "1.5", resize: "vertical" }}
             onChange={handleChange}
           ></textarea>
         </div>
-        <div className="col-12 col-lg-9">
+        <div>
           <input
             name="postAuthor"
             placeholder="What's your name?"
@@ -70,9 +69,9 @@ const PostForm = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="col-12 col-lg-3">
+        <div>
           <button
-            className="btn btn-primary btn-block py-3 bg-black w-96 text-white hover:text-gray-500"
+            className="btn btn-block py-3 bg-black w-96 text-white hover:text-gray-500"
             type="submit"
           >
             Create Post
