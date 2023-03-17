@@ -13,19 +13,10 @@ const userSchema = new Schema(
       unique: true,
       required: true,
       match: [/.+@.+\..+/, "Must match an email address!"],
-      // validate: {
-      //   validator: function (email) {
-      //     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
-      //   },
-      //   message: "Please enter a valid email address",
-      // },
     },
     password: {
       type: String,
       required: true,
-      // validate: {
-      //   len: [8],
-      // },
       validate: {
         validator: function (value) {
           return value.length > 0;

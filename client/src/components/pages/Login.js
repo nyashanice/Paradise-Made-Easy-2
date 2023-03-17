@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../utils/mutations";
 import { Link } from "react-router-dom";
-// import Auth from "../../utils/auth";
 
 const Login = (props) => {
   const [user, setUser] = useState({ email: "", password: "" });
@@ -24,7 +23,6 @@ const Login = (props) => {
       const { data } = await login({
         variables: { ...user },
       });
-      // Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
     }
@@ -108,6 +106,5 @@ const Login = (props) => {
   );
 };
 
-// return <div>{authenticated ? <Home /> : <LoginPage />}</div>;
 
 export default Login;

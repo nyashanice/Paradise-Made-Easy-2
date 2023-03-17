@@ -21,15 +21,16 @@ const resolvers = {
     addUser: async (parent, { name, email, password }) => {
       return User.create({ name, email, password });
     },
-    addPost: async (parent, { userId, post }) => {
-      return User.findOneAndUpdate(
-        { _id: userId },
-        { $addToSet: { posts: post } },
-        {
-          new: true,
-          runValidators: true,
-        }
-      );
+    addPost: async (parent, { postText, postAuthor }) => {
+      // return User.findOneAndUpdate(
+      //   { _id: userId },
+      //   { $addToSet: { posts: postText, postAuthor } },
+      //   {
+      //     new: true,
+      //     runValidators: true,
+      //   }
+      // );
+      return Post.create({ postText, postAuthor });
     },
     addComment: async (parent, { postId, commentBody, commentAuthor }) => {
       return Post.findOneAndUpdate(

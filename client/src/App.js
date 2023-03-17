@@ -21,32 +21,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-// const state = {
-//   name: "",
-//   email: "",
-//   posts: [],
-// };
-
-// const receivedUsers = () => {
-//   this.getUserData;
-// };
-
-// const getUserData = () => {
-//   axios
-//     .get("/api")
-//     .then((response) => {
-//       const data = response.data;
-//       this.setState;
-//       ({ users: data });
-//       console.log("done!");
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//     });
-// };
-
 function App() {
-  // const [loggedIn, setLoggedIn] = useState(false);
   return (
     <ApolloProvider client={client}>
       <Router>

@@ -10,7 +10,7 @@ const commentSchema = new mongoose.Schema(
 
     commentAuthor: { type: String, required: true },
 
-    createdAt: { type: Date, default: new Date(Date.now()).toString },
+    createdAt: { type: Date, default: Date.now()},
   },
   {
     toJSON: {
